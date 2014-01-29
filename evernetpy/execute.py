@@ -5,6 +5,7 @@ from parser import parse
 
 logger = logging.getLogger(__name__)
 
+
 def execute_listing_query(username, password, endpoint, params, filter=""):
     client = EvernetClient(endpoint)
     query = listing_query(username, password, params, filter)
@@ -12,6 +13,7 @@ def execute_listing_query(username, password, endpoint, params, filter=""):
     data = client.listing_query(query)
     logger.info('got results')
     return parse(data)
+
 
 def execute_photo_query(username, password, listing_number):
     client = EvernetClient('RetrieveImages')

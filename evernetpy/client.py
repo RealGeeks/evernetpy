@@ -2,7 +2,7 @@ from xml.sax.saxutils import escape
 import httplib
 import tempfile
 import logging
-from xml.parsers.expat import ParserCreate
+from xml.parsers.expat import ParserCreate, ExpatError
 
 logger = logging.getLogger(__name__)
 
@@ -51,7 +51,12 @@ class EvernetClient(object):
             p.StartElementHandler = self._start_element_get_envelope
             p.EndElementHandler = self._end_element_get_envelope
             p.CharacterDataHandler = self._char_data_get_envelope
-            p.ParseFile(response_file)
+            response_file.seek(0)
+            try:
+                p.ParseFile(response_file)
+            except ExpatError:
+                logging.error("Error parsing XML response from Evernet.  This usually happens when the server returns an error message.  You can see the full response if you set the logging to DEBUG level")
+                raise
         self.data.seek(0)
         return self.data
 

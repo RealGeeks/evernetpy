@@ -1,12 +1,17 @@
-import functools
+from itertools import tee
+from types import GeneratorType
 
-def memoize(obj):
-    cache = obj.cache = {}
+Tee = tee([], 1)[0].__class__
 
-    @functools.wraps(obj)
-    def memoizer(*args, **kwargs):
-        key = str(args) + str(kwargs)
-        if key not in cache:
-            cache[key] = obj(*args, **kwargs)
-        return cache[key]
-    return memoizer
+def memoize(f):
+    cache={}
+    def ret(*args):
+        if args not in cache:
+            cache[args]=f(*args)
+        if isinstance(cache[args], (GeneratorType, Tee)):
+            # the original can't be used any more,
+            # so we need to change the cache as well
+            cache[args], r = tee(cache[args])
+            return r
+        return cache[args]
+    return ret

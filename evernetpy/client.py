@@ -34,11 +34,13 @@ class EvernetClient(object):
         conn.putheader('Content-Length', '%d' % len(data))
         conn.endheaders()
         conn.send(data)
+        logger.info('Sent request...')
         logger.debug('>>> %s' % data)
 
         with tempfile.TemporaryFile() as response_file:
             response = conn.getresponse()
             tmp = response.read(1000)
+            logger.info('Receiving data...')
             while tmp:
                 response_file.write(tmp)
                 tmp = response.read(1000)
@@ -57,6 +59,7 @@ class EvernetClient(object):
             except ExpatError:
                 logging.error("Error parsing XML response from Evernet.  This usually happens when the server returns an error message.  You can see the full response if you set the logging to DEBUG level")
                 raise
+        logger.info('All data received, starting parsing')
         self.data.seek(0)
         return self.data
 

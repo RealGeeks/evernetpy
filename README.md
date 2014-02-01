@@ -6,6 +6,12 @@ This library wraps all the terrible things you have to do to get data out of NWM
 
 The listings returned by evernetpy are actually combined from several different tables in Evernet: The Listings table, the Amenities table, and the Offices table.  The amenities and office name are looked up and combined into the same result dictionary automatically.
 
+## Installation
+
+```bash
+pip install evernetpy
+```
+
 ## Get New Listings
 
 Use the `get_new_listings` method with your username and password.  This returns an iterator, each item in the iterator is a python dictionary with the listing data in it.  All the lookup fields have already been looked up for you.

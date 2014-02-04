@@ -19,7 +19,7 @@ Use the `get_new_listings` method with your username and password.  This returns
 ```python
 import evernetpy
 
-for listing in evernetpy.get_new_listings(username, password):
+for listing in evernetpy.get_new_listings(username, password, hours_previous=24):
     print listing
 ```
 
@@ -30,7 +30,7 @@ Basically the same thing as get new listings, but returns all of them!
 ```python
 import evernetpy
 
-for listing in evernetpy.get_new_listings(username, password):
+for listing in evernetpy.get_all_listings(username, password):
     print listing
 ```
 

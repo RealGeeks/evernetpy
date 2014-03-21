@@ -63,6 +63,14 @@ If you want to run the integration tests, you'll need an EverNet username and pa
 # Debugging
 Configure the python logger to barf out DEBUG if you want the HTTP going over the wire, INFO if you just want more stuff about the queries being run
 
+Just for kicks, here's how to turn on logging to the console for all loggers:
+
+```python
+console_log = logging.StreamHandler()
+logging.getLogger().addHandler(console_log)
+logging.getLogger().setLevel(logging.INFO)
+```
+
 # Changelog
 
 * 0.1.0: Evernet changed their feed, it looks like "AR" is no longer a lookup field.

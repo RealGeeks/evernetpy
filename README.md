@@ -63,6 +63,11 @@ If you want to run the integration tests, you'll need an EverNet username and pa
 # Debugging
 Configure the python logger to barf out DEBUG if you want the HTTP going over the wire, INFO if you just want more stuff about the queries being run
 
+# Changelog
+
+* 0.1.0: Evernet changed their feed, it looks like "AR" is no longer a lookup field.
+* 0.0.1: initial release
+
 # License
 
 The MIT License (MIT)

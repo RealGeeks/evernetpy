@@ -19,7 +19,7 @@ PROPERTY_TYPES = [
 
 
 def get_all_listings(username, password, property_types=PROPERTY_TYPES):
-    return get_new_listings(username, password, hours_previous=876581)
+    return get_new_listings(username, password, hours_previous=876581, property_types=property_types)
 
 
 def get_all_active_mls_numbers(username, password, property_types=PROPERTY_TYPES):

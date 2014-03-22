@@ -92,6 +92,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 1.0.1: Fix bug where the new property types weren't getting passed along
 * 1.0.0: Add support for different property types
 * 0.1.0: Evernet changed their feed, it looks like "AR" is no longer a lookup field.
 * 0.0.1: initial release

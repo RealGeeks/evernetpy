@@ -34,6 +34,25 @@ for listing in evernetpy.get_all_listings(username, password):
     print listing
 ```
 
+## Get only certain property types
+
+Both get_all_listings and get_all_active_mls_numbers take the optional argument property_types.
+This should be an array of strings.  The available property types are as follows:
+
+  * BUSO
+  * COMI
+  * COND
+  * FARM
+  * MANU
+  * MUL
+  * MULT
+  * RENT
+  * RESI
+  * TSHR
+  * VACL
+
+By default, we will return all property types.
+
 ## Get all active MLS numbers
 
 ```python
@@ -73,6 +92,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 1.0.0: Add support for different property types
 * 0.1.0: Evernet changed their feed, it looks like "AR" is no longer a lookup field.
 * 0.0.1: initial release
 

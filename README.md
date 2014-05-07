@@ -51,8 +51,12 @@ This should be an array of strings.  The available property types are as follows
   * TSHR
   * VACL
 
-
 By default, we will return all property types.
+
+## Get only certain areas
+
+All of get_new_listings, get_all_listings and get_all_active_mls_numbers take the optional argument property_types.
+This should be an array of strings. Correct values can be looked up in arealist.txt or evernetpy/lookups.py
 
 ## Get all active MLS numbers
 

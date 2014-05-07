@@ -36,7 +36,7 @@ for listing in evernetpy.get_all_listings(username, password):
 
 ## Get only certain property types
 
-Both get_all_listings and get_all_active_mls_numbers take the optional argument property_types.
+All of get_new_listings, get_all_listings and get_all_active_mls_numbers take the optional argument property_types.
 This should be an array of strings.  The available property types are as follows:
 
   * BUSO
@@ -50,6 +50,7 @@ This should be an array of strings.  The available property types are as follows
   * RESI
   * TSHR
   * VACL
+
 
 By default, we will return all property types.
 

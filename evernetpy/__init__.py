@@ -329,7 +329,7 @@ def get_all_active_mls_numbers(username, password, property_types=PROPERTY_TYPES
 
     for property_type in property_types:
         for area in areas:
-            for row in execute_listing_query(username, password, 'RetrieveListingData', {'BeginDate': begin_date, 'EndDate': end_date, 'MLS': 'nwmls', 'PropertyType': property_type, 'Area': area 'Status': 'A'}, filter="LN,ST"):
+            for row in execute_listing_query(username, password, 'RetrieveListingData', {'BeginDate': begin_date, 'EndDate': end_date, 'MLS': 'nwmls', 'PropertyType': property_type, 'Area': area, 'Status': 'A'}, filter="LN,ST"):
                 info = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
                 if info.get('ST') == 'A':
                     yield info.get('LN')

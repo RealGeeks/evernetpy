@@ -22,7 +22,7 @@ AREAS = FIXED_NWMLS_LOOKUPS['SD'].values()
 
 
 def get_all_listings(username, password, property_types=PROPERTY_TYPES, areas=AREAS):
-    return get_new_listings(username, password, hours_previous=876581, property_types=property_types, areas=AREAS)
+    return get_new_listings(username, password, hours_previous=876581, property_types=property_types, areas=areas)
 
 
 def get_all_active_mls_numbers(username, password, property_types=PROPERTY_TYPES, areas=AREAS):

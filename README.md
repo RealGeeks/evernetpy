@@ -55,7 +55,7 @@ By default, we will return all property types.
 
 ## Get only certain areas
 
-All of get_new_listings, get_all_listings and get_all_active_mls_numbers take the optional argument property_types.
+All of get_new_listings, get_all_listings and get_all_active_mls_numbers take the optional argument areas.
 This should be an array of strings. Correct values can be looked up in arealist.txt or evernetpy/lookups.py
 
 ## Get all active MLS numbers

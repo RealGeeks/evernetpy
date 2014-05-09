@@ -1,63 +1,61 @@
 import base64
 import datetime
+import itertools
 from execute import execute_listing_query, execute_photo_query
 from lookups import look_up_all_fields
 
 PROPERTY_TYPES = [
-    'BUSO',
-    'COMI',
-    'COND',
-    'FARM',
-    'MANU',
-    'MULT'
-    'MULT',
-    'RENT',
-    'RESI',
-    'TSHR',
-    'VACL',
+        'BUSO',
+        'COMI',
+        'COND',
+        'FARM',
+        'MANU',
+        'MULT'
+        'MULT',
+        'RENT',
+        'RESI',
+        'TSHR',
+        'VACL',
 ]
 
+def _get_criteria(begin_date, end_date, property_types=[], areas=[], status=None):
+    areas = areas or [None]
+    property_types = property_types or PROPERTY_TYPES
+    for property_type, area in itertools.product(property_types, areas):
+        criteria = {
+            'MLS': 'nwmls',
+            'BeginDate': begin_date,
+            'EndDate': end_date,
+            'EndDate': end_date,
+        }
+        if area:
+            criteria['Area'] = area
+        if status:
+            criteria['Status'] = status
+        if property_type:
+            criteria['PropertyType'] = property_type
+        yield criteria
 
-def get_all_listings(username, password, property_types=PROPERTY_TYPES, areas=[]):
+
+def get_all_listings(username, password, property_types=[], areas=[]):
     return get_new_listings(username, password, hours_previous=876581, property_types=property_types, areas=areas)
 
 
-def get_all_active_mls_numbers(username, password, property_types=PROPERTY_TYPES, areas=[]):
-    begin_date = "1990-01-01T00:00:00"
-    end_date = "3000-01-01T00:00:00"
-
-    if areas == []:
-        for property_type in property_types:
-            for row in execute_listing_query(username, password, 'RetrieveListingData', {'BeginDate': begin_date, 'EndDate': end_date, 'MLS': 'nwmls', 'PropertyType': property_type, 'Status': 'A'}, filter="LN,ST"):
-                info = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
-                if info.get('ST') == 'A':
-                    yield info.get('LN')
-    else:
-        for property_type in property_types:
-            for area in areas:
-                for row in execute_listing_query(username, password, 'RetrieveListingData', {'BeginDate': begin_date, 'EndDate': end_date, 'MLS': 'nwmls', 'PropertyType': property_type, 'Area': area, 'Status': 'A'}, filter="LN,ST"):
-                    info = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
-                    if info.get('ST') == 'A':
-                        yield info.get('LN')
+def get_all_active_mls_numbers(username, password, property_types=[], areas=[]):
+    for criteria in _get_criteria('1990-01-01T00:00:00', '3000-01-01T00:00:00', status='A'):
+        for row in execute_listing_query(username, password, 'RetrieveListingData', criteria, filter="LN,ST"):
+            info = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
+            yield info.get('LN')
 
 
-
-def get_new_listings(username, password, hours_previous=24, property_types=PROPERTY_TYPES, areas=[]):
+def get_new_listings(username, password, hours_previous=24, property_types=[], areas=[]):
     begin_date = (datetime.datetime.utcnow() - datetime.timedelta(hours=hours_previous)).strftime('%Y-%m-%dT%H:%M:%S')
     end_date = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
 
-    if areas == []:
-        for property_type in property_types:
-            for row in execute_listing_query(username, password, 'RetrieveListingData', {'BeginDate': begin_date, 'EndDate': end_date, 'MLS': 'nwmls', 'PropertyType': property_type}):
-                out = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
-                yield look_up_all_fields(username, password, out)
-    else:
-        for property_type in property_types:
-            for area in areas:
-                for row in execute_listing_query(username, password, 'RetrieveListingData', {'BeginDate': begin_date, 'EndDate': end_date, 'MLS': 'nwmls', 'PropertyType': property_type, 'Area': area}):
-                    out = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
-                    yield look_up_all_fields(username, password, out)
-
+    for criteria in _get_criteria(begin_date, end_date, property_types, areas):
+        for row in execute_listing_query(username, password, 'RetrieveListingData', criteria):
+            out = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
+            yield look_up_all_fields(username, password, out)
 
 
 def get_photos(username, password, listing_id):

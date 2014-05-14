@@ -1,5 +1,12 @@
 from evernetpy import _get_criteria
 
+def test_get_criteria_basic():
+    output = [x for x in _get_criteria('foo','bar')]
+    print output
+    assert output == [
+        {'MLS': 'nwmls', 'BeginDate': 'foo', 'EndDate': 'bar'}
+    ]
+
 def test_get_criteria_empty_areas():
     output = [x for x in _get_criteria('foo','bar', property_types=[1,2,3])]
     assert output == [

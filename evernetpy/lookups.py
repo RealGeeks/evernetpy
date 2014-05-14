@@ -351,6 +351,8 @@ def _get_amenities_table(amenities):
 def _look_up_dynamic_fields(username, password, row):
     prop_type = row.get('PTYP')
     out = {}
+    if not prop_type:
+        return out
     lookup_table = _get_amenities_table(_get_amenities(username, password, prop_type))
     for key, value in row.iteritems():
         if not value:

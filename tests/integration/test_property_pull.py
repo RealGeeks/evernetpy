@@ -1,8 +1,13 @@
 from evernetpy import get_new_listings, get_all_active_mls_numbers, get_photos, get_new_listings
 from os import environ
+import logging
 
 username = environ.get('EVERNET_USERNAME')
 password = environ.get('EVERNET_PASSWORD')
+
+console_log = logging.StreamHandler()
+logging.getLogger().addHandler(console_log)
+logging.getLogger().setLevel(logging.INFO)
 
 def test_get_new_listings_unfiltered():
     results = get_new_listings(username, password)
@@ -12,7 +17,7 @@ def test_get_new_listings_filtered_by_area():
     results = get_new_listings(username, password, property_types=['RESI'], areas=['500'])
     areas = [r['AR'] for r in results]
     assert len(areas)
-    assert all([a == '500 - East Side/South' for a in areas])
+    assert all(['500 - East Side/South' in a for a in areas])
 
 def test_get_new_listings_filtered_by_city():
     results = get_new_listings(username, password, property_types=['RESI'], cities=['Seattle'])

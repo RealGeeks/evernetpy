@@ -4,7 +4,7 @@ import itertools
 from execute import execute_listing_query, execute_photo_query
 from lookups import look_up_all_fields
 
-PROPERTY_TYPES = [
+ALL_PROPERTY_TYPES = [
         'BUSO',
         'COMI',
         'COND',
@@ -18,29 +18,47 @@ PROPERTY_TYPES = [
         'VACL',
 ]
 
-def _get_criteria(begin_date, end_date, property_types=PROPERTY_TYPES, areas=[], cities=[], status=None):
-    areas = areas or [None]
-    cities = cities or [None]
-    for property_type, area, city in itertools.product(property_types, areas, cities):
-        criteria = {
-            'MLS': 'nwmls',
-            'BeginDate': begin_date,
-            'EndDate': end_date,
-            'EndDate': end_date,
-        }
-        if area:
-            criteria['Area'] = area
-        if city:
-            criteria['City'] = city
-        if status:
-            criteria['Status'] = status
-        if property_type:
-            criteria['PropertyType'] = property_type
+def _get_criteria(begin_date, end_date, property_types=[], areas=[], cities=[], status=None):
+    criteria = {
+        'MLS': 'nwmls',
+        'BeginDate': begin_date,
+        'EndDate': end_date,
+        'EndDate': end_date,
+    }
+    if not cities and not areas and not property_types:
         yield criteria
+    else:
+        areas = areas or [None]
+        cities = cities or [None]
+        # if you give no property types, nothing is returned from nwmls --\(-_-)/--
+        property_types = property_types or [None] #ALL_PROPERTY_TYPES
+        for property_type, area, city in itertools.product(property_types, areas, cities):
+            criteria = {
+                'MLS': 'nwmls',
+                'BeginDate': begin_date,
+                'EndDate': end_date,
+                'EndDate': end_date,
+            }
+            if area:
+                criteria['Area'] = area
+            if city:
+                criteria['City'] = city
+            if status:
+                criteria['Status'] = status
+            if property_type:
+                criteria['PropertyType'] = property_type
+            yield criteria
 
 
 def get_all_listings(username, password, property_types=[], areas=[], cities=[]):
-    return get_new_listings(username, password, hours_previous=876581, property_types=property_types, areas=areas, cities=[])
+    return get_new_listings(
+        username,
+        password,
+        hours_previous=876581,
+        property_types=property_types,
+        areas=areas,
+        cities=[]
+    )
 
 
 def get_all_active_mls_numbers(username, password, property_types=[], areas=[], cities=[]):

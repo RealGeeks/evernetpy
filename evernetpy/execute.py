@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 def execute_listing_query(username, password, endpoint, params, filter=""):
     client = EvernetClient(endpoint)
     query = listing_query(username, password, params, filter)
-    logger.info('Executing query %s...' % endpoint)
+    logger.info('Executing query %s with params %s...' % (endpoint, params))
     data = client.listing_query(query)
     logger.info('got results')
     return parse(data)

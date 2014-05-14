@@ -10,8 +10,13 @@ def test_get_new_listings_unfiltered():
 
 def test_get_new_listings_filtered_by_area():
     results = get_new_listings(username, password, property_types=['RESI'], areas=['500'])
-    import pdb;pdb.set_trace()
-    cities = [r['AR'] for r in results]
+    areas = [r['AR'] for r in results]
+    assert len(areas)
+    assert all([a == '500 - East Side/South' for a in areas])
+
+def test_get_new_listings_filtered_by_city():
+    results = get_new_listings(username, password, property_types=['RESI'], cities=['Seattle'])
+    cities = [r['CIT'] for r in results]
     assert len(cities)
     assert all([c == 'Seattle' for c in cities])
 

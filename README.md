@@ -96,7 +96,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
-* 2.0.0: [in development] Add ability to filter by area and city, changed some method signatures so this is backwards-incompatible.
+* 2.0.0: Add ability to filter by area and city, changed some method signatures so this is backwards-incompatible.
 * 1.0.1: Fix bug where the new property types weren't getting passed along
 * 1.0.0: Add support for different property types
 * 0.1.0: Evernet changed their feed, it looks like "AR" is no longer a lookup field.

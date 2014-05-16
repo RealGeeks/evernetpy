@@ -34,7 +34,6 @@ setup(name='evernetpy',
       tests_require=['pytest','mock'],
       cmdclass={'test': PyTest},
       classifiers=[
-          'Development Status :: 4 - Beta',
           'Environment :: Console',
           'Intended Audience :: Developers',
           'Programming Language :: Python',

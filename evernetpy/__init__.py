@@ -39,3 +39,14 @@ def get_photos(username, password, listing_id):
         out = dict([(c.tag.replace('{NWMLS:EverNet:ImageData:1.0}', ''), c.text) for c in row.getchildren()])
         out['BLOB'] = base64.b64decode(out['BLOB'])
         yield out
+
+def get_property(username, password, mls_number):
+    criteria = {
+        'MLS':'nwmls',
+        'ListingNumber':mls_number
+    }
+    results = execute_listing_query(username, password, 'RetrieveListingData', criteria)
+    first_result = next(results) # only return first match
+    out = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in first_result.getchildren()])
+    return look_up_all_fields(username, password, out)
+

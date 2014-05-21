@@ -67,6 +67,16 @@ evernetpy.get_all_active_mls_numbers(username, password)
 
 This gives you an iterator with all the active MLS numbers in it.
 
+## Get a single property by mls_number
+
+```python
+import evernetpy
+
+evernetpy.get_property(username, password, mls_number)
+```
+
+Returns a dictionary with the information from a single MLS number.  Looks up all the data for the lookup fields for you behind the scenes.
+
 ## Get Photos
 
 Call this with the listing ID and you get an iterator with photos in it.  Each photo is a dictionary with some metadata about the photo.  The BLOB key has the binary of the actual photo.
@@ -96,6 +106,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 2.1.0: Add the ability to grab a single listing by MLS number
 * 2.0.3: It turns out that Evernet assumes you only want 'RESI' properties if you don't explicitly specify, so let's do so.
 * 2.0.2: Fixed a bug where items were not being filtered on in the `get_all_active_listings` method
 * 2.0.1: Fixed a bug where status wasn't being filtered correctly

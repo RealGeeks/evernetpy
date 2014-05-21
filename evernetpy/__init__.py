@@ -18,7 +18,7 @@ def get_all_listings(username, password, property_types=[], areas=[], cities=[])
 
 
 def get_all_active_mls_numbers(username, password, property_types=[], areas=[], cities=[]):
-    for criteria in iterate_criteria('1990-01-01T00:00:00', '3000-01-01T00:00:00', status=['A']):
+    for criteria in iterate_criteria('1990-01-01T00:00:00', '3000-01-01T00:00:00', status=['A'], property_types=property_types, areas=areas, cities=cities):
         for row in execute_listing_query(username, password, 'RetrieveListingData', criteria, filter="LN,ST"):
             info = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
             yield info.get('LN')

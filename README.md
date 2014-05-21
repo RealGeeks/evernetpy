@@ -96,6 +96,9 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 2.0.3: It turns out that Evernet assumes you only want 'RESI' properties if you don't explicitly specify, so let's do so.
+* 2.0.2: Fixed a bug where items were not being filtered on in the `get_all_active_listings` method
+* 2.0.1: Fixed a bug where status wasn't being filtered correctly
 * 2.0.0: Add ability to filter by area and city, changed some method signatures so this is backwards-incompatible.
 * 1.0.1: Fix bug where the new property types weren't getting passed along
 * 1.0.0: Add support for different property types

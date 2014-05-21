@@ -7,6 +7,13 @@ def test_iterate_criteria_basic():
         {'MLS': 'nwmls', 'BeginDate': 'foo', 'EndDate': 'bar'}
     ]
 
+def test_iterate_criteria_status():
+    output = [x for x in iterate_criteria('foo','bar', status=['A'])]
+    print output
+    assert output == [
+        {'MLS': 'nwmls', 'BeginDate': 'foo', 'EndDate': 'bar', 'Status': 'A'}
+    ]
+
 def test_iterate_criteria_empty_areas():
     output = [x for x in iterate_criteria('foo','bar', property_types=[1,2,3])]
     assert output == [

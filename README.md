@@ -34,6 +34,15 @@ for listing in evernetpy.get_all_listings(username, password):
     print listing
 ```
 
+## Get all Active Listings
+
+```python
+import evernetpy
+
+for listing in evernetpy.get_all_listings(username, password, status=['A']):
+    print listing
+```
+
 ## Get only certain property types
 
 All of get_new_listings, get_all_listings and get_all_active_mls_numbers take the optional argument property_types.
@@ -106,6 +115,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 2.2.0: Add the ability to get all active listings
 * 2.1.0: Add the ability to grab a single listing by MLS number
 * 2.0.3: It turns out that Evernet assumes you only want 'RESI' properties if you don't explicitly specify, so let's do so.
 * 2.0.2: Fixed a bug where items were not being filtered on in the `get_all_active_listings` method

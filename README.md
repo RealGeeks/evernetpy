@@ -115,6 +115,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 2.2.1: Bugfix: now you can actually use the status parameter to get all active listings
 * 2.2.0: Add the ability to get all active listings
 * 2.1.0: Add the ability to grab a single listing by MLS number
 * 2.0.3: It turns out that Evernet assumes you only want 'RESI' properties if you don't explicitly specify, so let's do so.

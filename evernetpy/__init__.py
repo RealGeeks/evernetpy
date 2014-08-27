@@ -13,8 +13,8 @@ def get_all_listings(username, password, property_types=[], areas=[], cities=[],
         hours_previous=876581,
         property_types=property_types,
         areas=areas,
-        cities=[],
-        status=[]
+        cities=cities,
+        status=status,
     )
 
 

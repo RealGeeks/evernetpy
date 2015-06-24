@@ -74,7 +74,7 @@ import evernetpy
 evernetpy.get_all_active_mls_numbers(username, password)
 ```
 
-This gives you an iterator with all the active MLS numbers in it.
+This gives you an iterator with all the active MLS numbers in it.  You can also optionally pass the date_min and date_max fields.  They should be python datetime objects.
 
 ## Get a single property by mls_number
 
@@ -115,6 +115,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 2.3.0: You can now pass in date_min and date max to the `get_all_active_mls_nubmers` function
 * 2.2.1: Bugfix: now you can actually use the status parameter to get all active listings
 * 2.2.0: Add the ability to get all active listings
 * 2.1.0: Add the ability to grab a single listing by MLS number

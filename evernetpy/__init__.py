@@ -18,14 +18,14 @@ def get_all_listings(username, password, property_types=[], areas=[], cities=[],
     )
 
 
-def get_all_active_mls_numbers(username, password, property_types=[], areas=[], cities=[], date_min=None, date_max=None):
+def get_mls_numbers(username, password, property_types=[], areas=[], cities=[], status=['A'], date_min=None, date_max=None):
     if not date_min:
         date_min = datetime.datetime(year=1990, month=1, day=1, hour=0, minute=0, second=0)
     if not date_max:
         date_max = datetime.datetime(year=3000, month=1, day=1, hour=0, minute=0, second=0)
     date_min = date_min.strftime('%Y-%m-%dT%H:%M:%S')
     date_max = date_max.strftime('%Y-%m-%dT%H:%M:%S')
-    for criteria in iterate_criteria(date_min, date_max, status=['A'], property_types=property_types, areas=areas, cities=cities):
+    for criteria in iterate_criteria(date_min, date_max, status=status, property_types=property_types, areas=areas, cities=cities):
         for row in execute_listing_query(username, password, 'RetrieveListingData', criteria, filter="LN,ST"):
             info = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
             yield info.get('LN')

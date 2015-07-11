@@ -66,15 +66,15 @@ By default, we will return all property types.
 
 `get_new_listings`, `get_all_listings`, and `get_all_active_mls_numbers` take the optional arguments `areas` and `cities`.  They take an array of strings, and can be used to filter results by city or area.
 
-## Get all active MLS numbers
+## Get MLS numbers only
 
 ```python
 import evernetpy
 
-evernetpy.get_all_active_mls_numbers(username, password)
+evernetpy.get_mls_numbers(username, password)
 ```
 
-This gives you an iterator with all the active MLS numbers in it.  You can also optionally pass the date_min and date_max fields.  They should be python datetime objects.
+This gives you an iterator with all the active MLS numbers in it.  You can also optionally pass the date_min and date_max, and status fields.  They should be python datetime objects.
 
 ## Get a single property by mls_number
 
@@ -115,6 +115,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 3.0.0: Change `get_all_active_mls_numbers` to `get_mls_numbers`.  This is a breaking API change.
 * 2.3.0: You can now pass in date_min and date max to the `get_all_active_mls_nubmers` function
 * 2.2.1: Bugfix: now you can actually use the status parameter to get all active listings
 * 2.2.0: Add the ability to get all active listings

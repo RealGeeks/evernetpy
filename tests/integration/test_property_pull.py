@@ -1,4 +1,4 @@
-from evernetpy import get_new_listings, get_all_active_mls_numbers, get_photos, get_new_listings, get_property
+from evernetpy import get_new_listings, get_mls_numbers, get_photos, get_new_listings, get_property
 from os import environ
 import logging
 
@@ -8,6 +8,12 @@ password = environ.get('EVERNET_PASSWORD')
 console_log = logging.StreamHandler()
 logging.getLogger().addHandler(console_log)
 logging.getLogger().setLevel(logging.INFO)
+
+def test_get_new_sold_listings():
+    results = get_new_listings(username, password, property_types=['RESI'])
+    for r in results:
+        if r['ST'].upper() == 'SOLD':
+            assert 'SP' in r
 
 def test_get_new_listings_unfiltered():
     results = get_new_listings(username, password)
@@ -26,7 +32,7 @@ def test_get_new_listings_filtered_by_city():
     assert all([c == 'Seattle' for c in cities])
 
 def test_get_all_active_mls_numbers():
-    results = get_all_active_mls_numbers(username, password)
+    results = get_mls_numbers(username, password)
     assert len([r for r in results])
 
 def test_get_photos():

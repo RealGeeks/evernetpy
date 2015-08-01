@@ -10,7 +10,7 @@ def get_all_listings(username, password, property_types=[], areas=[], cities=[],
     return get_new_listings(
         username,
         password,
-        hours_previous=876581,
+        start_date = (datetime.datetime.utcnow() - datetime.timedelta(hours=876581)),
         property_types=property_types,
         areas=areas,
         cities=cities,
@@ -31,11 +31,13 @@ def get_mls_numbers(username, password, property_types=[], areas=[], cities=[], 
             yield info.get('LN')
 
 
-def get_new_listings(username, password, hours_previous=24, property_types=[], areas=[], cities=[], status=[]):
-    begin_date = (datetime.datetime.utcnow() - datetime.timedelta(hours=hours_previous)).strftime('%Y-%m-%dT%H:%M:%S')
-    end_date = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
+def get_new_listings(username, password, start_date=None, end_date=None, property_types=[], areas=[], cities=[], status=[]):
+    if not start_date:
+        start_date = (datetime.datetime.utcnow() - datetime.timedelta(hours=24)).strftime('%Y-%m-%dT%H:%M:%S')
+    if not end_date:
+        end_date = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%S')
 
-    for criteria in iterate_criteria(begin_date, end_date, property_types, areas, cities, status):
+    for criteria in iterate_criteria(start_date, end_date, property_types, areas, cities, status):
         for row in execute_listing_query(username, password, 'RetrieveListingData', criteria):
             out = dict([(c.tag.replace('{http://www.nwmls.com/Schemas/Standard/StandardXML1_2.xsd}', ''), c.text) for c in row.getchildren()])
             yield look_up_all_fields(username, password, out)

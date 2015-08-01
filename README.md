@@ -115,6 +115,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 4.0.1: Fix bug with formatting date strings
 * 4.0.0: Breaking API change: `get_new_listings` now takes a `start_date` and `end_date` optional parameter, instead of `hours_previous`
 * 3.0.0: Change `get_all_active_mls_numbers` to `get_mls_numbers`.  This is a breaking API change.
 * 2.3.0: You can now pass in date_min and date max to the `get_all_active_mls_nubmers` function

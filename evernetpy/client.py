@@ -66,8 +66,8 @@ class EvernetClient(object):
     def photo_query(self, query):
         data = '<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><soap:Body><RetrieveImages xmlns="NWMLS:EverNet"><query>{0}</query></RetrieveImages></soap:Body></soap:Envelope>'.format(escape(query))
         import socket
-        socket.setdefaulttimeout(60 * 5)
-        conn = httplib.HTTPConnection('images.idx.nwmls.com', timeout=60 * 5)
+        socket.setdefaulttimeout(30)
+        conn = httplib.HTTPConnection('images.idx.nwmls.com', timeout=30)
         conn.putrequest('POST', '/imageservice/imagequery.asmx')
         conn.putheader('Content-Type', 'text/xml; charset=utf-8')
         conn.putheader('Soapaction', 'NWMLS:EverNet/RetrieveImages')

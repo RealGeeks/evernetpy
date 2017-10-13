@@ -115,6 +115,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 # Changelog
 
+* 5.0.0: Add requests as a dependency, add retries for failed connections
 * 4.0.2: Reduce image download timeout from 5 minutes to 30 seconds
 * 4.0.1: Fix bug with formatting date strings
 * 4.0.0: Breaking API change: `get_new_listings` now takes a `start_date` and `end_date` optional parameter, instead of `hours_previous`

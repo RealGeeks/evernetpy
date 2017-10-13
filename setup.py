@@ -19,7 +19,7 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 setup(name='evernetpy',
-      version='4.0.2',
+      version='5.0.0',
       description="A Python library for interacting with the EverNet listing service",
       author='Kevin McCarthy',
       author_email='me@kevinmccarthy.org',
@@ -31,6 +31,7 @@ setup(name='evernetpy',
         'evernetpy': 'evernetpy',
       },
       license='MIT',
+      install_requires=['requests'],
       tests_require=['pytest','mock'],
       cmdclass={'test': PyTest},
       classifiers=[

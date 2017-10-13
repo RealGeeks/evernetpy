@@ -40,7 +40,7 @@ def test_get_photos():
     assert len([r for r in results])
 
 def test_get_property():
-    property = get_property(username, password, '596799')
+    property = get_property(username, password, '880271')
     # note: this must be an active mls number, if this test stats failing,
     # try changing it :)
     assert property

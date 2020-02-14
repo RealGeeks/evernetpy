@@ -374,14 +374,22 @@ def _look_up_fixed_fields(row):
             out[key] = value
     return out
 
-def _add_office_name_field(row, username, password):
+def _add_office_name_fields(username, password, row):
+    office_field_map = {
+        'OFFICENAME': 'LO',
+        'SELLINGOFFICENAME': 'SO',
+    }
+
     offices = _get_office_table(_get_offices(username, password))
-    row['OFFICENAME'] = offices.get(row.get('LO'))
+
+    for namefield, idfield in office_field_map.iteritems():
+        row[namefield] = offices.get(row.get(idfield))
+
     return row
 
 
 def look_up_all_fields(username, password, row):
     row = _look_up_dynamic_fields(username, password, row)
-    row = _add_office_name_field(row, username, password)
+    row = _add_office_name_fields(username, password, row)
     row = _look_up_fixed_fields(row)
     return row

@@ -374,7 +374,7 @@ def _look_up_fixed_fields(row):
             out[key] = value
     return out
 
-def _add_office_name_fields(row, username, password):
+def _add_office_name_fields(username, password, row):
     office_field_map = {
         'OFFICENAME': 'LO',
         'SELLINGOFFICENAME': 'SO',
@@ -390,6 +390,6 @@ def _add_office_name_fields(row, username, password):
 
 def look_up_all_fields(username, password, row):
     row = _look_up_dynamic_fields(username, password, row)
-    row = _add_office_name_fields(row, username, password)
+    row = _add_office_name_fields(username, password, row)
     row = _look_up_fixed_fields(row)
     return row

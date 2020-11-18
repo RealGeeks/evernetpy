@@ -1,8 +1,8 @@
 import base64
 import datetime
-from execute import execute_listing_query, execute_photo_query
-from lookups import look_up_all_fields
-from criteria import iterate_criteria
+from evernetpy.execute import execute_listing_query, execute_photo_query
+from evernetpy.lookups import look_up_all_fields
+from evernetpy.criteria import iterate_criteria
 
 TIME_FORMAT_STRING = '%Y-%m-%dT%H:%M:%S'
 

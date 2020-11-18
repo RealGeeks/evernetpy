@@ -1,6 +1,6 @@
-from execute import execute_listing_query
 from collections import defaultdict
-from memoize import memoize
+from evernetpy.execute import execute_listing_query
+from evernetpy.memoize import memoize
 
 office_name_cache = {}
 

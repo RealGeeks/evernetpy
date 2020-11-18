@@ -1,7 +1,7 @@
 import logging
-from client import EvernetClient
-from query import listing_query, photo_query
-from parser import parse
+from evernetpy.client import EvernetClient
+from evernetpy.query import listing_query, photo_query
+from evernetpy.parser import parse
 
 logger = logging.getLogger(__name__)
 

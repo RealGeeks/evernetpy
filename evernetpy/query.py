@@ -21,7 +21,7 @@ PHOTO_QUERY = '<ImageQuery xmlns="NWMLS:EverNet:ImageQuery:1.0"><Auth><UserId>{U
 LISTING_QUERY = '<EverNetQuerySpecification xmlns="urn:www.nwmls.com/Schemas/General/EverNetQueryXML.xsd"><Message><Head><UserId>{UserId}</UserId><Password>{Password}</Password><SchemaName>StandardXML1_2</SchemaName></Head><Body><Query>{Query}</Query><Filter>{Filter}</Filter></Body></Message></EverNetQuerySpecification>'
 
 def _validate_query(query, valid_fields):
-    for i, v in query.iteritems():
+    for i, v in query.items():
         if i not in valid_fields:
             raise ValueError("Invalid field %s" % i)
 

@@ -354,7 +354,7 @@ def _look_up_dynamic_fields(username, password, row):
     if not prop_type:
         return out
     lookup_table = _get_amenities_table(_get_amenities(username, password, prop_type))
-    for key, value in row.iteritems():
+    for key, value in row.items():
         if not value:
             continue
         if key not in lookup_table:
@@ -367,7 +367,7 @@ def _look_up_dynamic_fields(username, password, row):
 
 def _look_up_fixed_fields(row):
     out = {}
-    for key, value in row.iteritems():
+    for key, value in row.items():
         if key in FIXED_NWMLS_LOOKUPS:
             out[key] = FIXED_NWMLS_LOOKUPS[key].get(value, value)
         else:
@@ -382,7 +382,7 @@ def _add_office_name_fields(username, password, row):
 
     offices = _get_office_table(_get_offices(username, password))
 
-    for namefield, idfield in office_field_map.iteritems():
+    for namefield, idfield in office_field_map.items():
         row[namefield] = offices.get(row.get(idfield))
 
     return row
